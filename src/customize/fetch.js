@@ -4,7 +4,7 @@ import axios from "axios";
 import moment from 'moment';
 
 const useFetch = () => {
-    const [dataRandom, setDataRandom] = useState([]);
+    const [data, setDataRandom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     useEffect(() => {
@@ -23,12 +23,13 @@ const useFetch = () => {
             }
             fetchData();
         } catch (error) {
+            console.log('dsd');
             setIsError(true);
             setIsLoading(false);
         }
     }, [])
     return {
-        dataRandom, isError, isLoading
+        data, isError, isLoading
     }
 
 }

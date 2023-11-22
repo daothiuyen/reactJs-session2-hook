@@ -4,6 +4,12 @@ import Nav from './views/Nav';
 import { useState, useEffect } from 'react';
 import Todo from './views/Todo';
 import Covid from './views/Covid';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  useParams
+} from "react-router-dom";
 
 
 const App = () => {
@@ -44,25 +50,30 @@ const App = () => {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello world {name}</h1>
-        <Covid />
-        {/* <Todo
-          todos={todos}
-          title={'title'}
-          deleteDataTodo={deleteDataTodo}
-        />
-        <Todo
-          todos={todos.filter(item => item.type === 'type 1')}
-          title="title"
-        />
-        <input type="text" value={address} onChange={(event) => handleOnChange(event)} />
-        <button type="button" onClick={() => handleEventClick()}>Click</button> */}
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1>Hello world {name}</h1>
+          <Switch>
+            <Route exact path="/">
+              <Covid />
+            </Route>
+            <Route path="/todo">
+              <Todo
+                todos={todos}
+                title={'title'}
+                deleteDataTodo={deleteDataTodo}
+              />
+              <input type="text" value={address} onChange={(event) => handleOnChange(event)} />
+              <button type="button" onClick={() => handleEventClick()}>Click</button>
+            </Route>
+          </Switch>
+        </header>
+      </div>
+    </Router>
+
   );
 }
 
