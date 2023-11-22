@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import Nav from './views/Nav';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Todo from './views/Todo';
+import Covid from './views/Covid';
 
 
 const App = () => {
@@ -14,6 +15,14 @@ const App = () => {
     { id: 2, title: 'Todo 2', type: 'type 1' },
     { id: 3, title: 'Todo 3', type: 'type 3' },
   ]);
+  useEffect(() => {
+    console.log('run use effect');
+  }, [address])
+
+  useEffect(() => {
+    console.log('run use effect todos');
+  }, [todos])
+
   const handleEventClick = () => {
     if (!address) {
       alert('wanring');
@@ -40,7 +49,8 @@ const App = () => {
         <Nav />
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world {name}</h1>
-        <Todo
+        <Covid />
+        {/* <Todo
           todos={todos}
           title={'title'}
           deleteDataTodo={deleteDataTodo}
@@ -50,7 +60,7 @@ const App = () => {
           title="title"
         />
         <input type="text" value={address} onChange={(event) => handleOnChange(event)} />
-        <button type="button" onClick={() => handleEventClick()}>Click</button>
+        <button type="button" onClick={() => handleEventClick()}>Click</button> */}
       </header>
     </div>
   );
