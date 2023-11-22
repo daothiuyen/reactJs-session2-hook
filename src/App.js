@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import Nav from './views/Nav';
 import { useState } from 'react';
+import Todo from './views/Todo';
 
 
 const App = () => {
@@ -23,7 +24,6 @@ const App = () => {
     setAddress('');
   }
   const handleOnChange = (event) => {
-    setAddress(event.target.value);
     console.log('fdfdg', event.target.value)
   }
 
@@ -33,15 +33,7 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world {name}</h1>
-        <div className='todo-container'>
-          {todos.map((item, index) => {
-            //cần thêm key để react thêm hiệu năng
-            return (
-              <li key={item.id} className='todo-child'>{item.title}</li>
-            )
-          })
-          }
-        </div>
+        <Todo todos={todos} />
         <input type="text" value={address} onChange={(event) => handleOnChange(event)} />
         <button type="button" onClick={() => handleEventClick()}>Click</button>
       </header>
