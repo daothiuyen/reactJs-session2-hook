@@ -5,15 +5,21 @@ import moment from 'moment';
 
 const Covid = () => {
     const [dataRandom, setDataRandom] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(async () => {
-        let res = await axios.get('https://random-data-api.com/api/v2/users?size=2&is_xml=true')
-        let data = res && res.data ? res.data : [];
-        if (data && data.length > 0) {
-            data.map(item => {
-                item.date_of_birth = moment(item.date_of_birth).format('DD/MM/YYYY');
-            })
-        }
-        setDataRandom(data);
+        setTimeout(async () => {
+            let res = await axios.get('https://random-data-api.com/api/v2/users?size=2&is_xml=true')
+            let data = res && res.data ? res.data : [];
+            if (data && data.length > 0) {
+                data.map(item => {
+                    item.date_of_birth = moment(item.date_of_birth).format('DD/MM/YYYY');
+                })
+            }
+            setDataRandom(data);
+            setLoading(false);
+        }, 20000)
+
+
     }, [])
     return (
         <table>
@@ -29,7 +35,7 @@ const Covid = () => {
 
             </thead>
             <tbody>
-                {dataRandom && dataRandom.length > 0 &&
+                {loading === false && dataRandom && dataRandom.length > 0 &&
                     dataRandom.map(item => {
                         return (
                             <tr key={item.id}>
@@ -40,10 +46,15 @@ const Covid = () => {
                                 <td>{item.phone_number}</td>
                             </tr>
                         )
-                    })}
+                    })
+                }
+
+                {loading === true &&
+                    <tr colSpan='5' style={{ 'textAlign': 'center' }}>Loading</tr>
+                }
 
             </tbody>
-        </table>
+        </table >
     )
 }
 
