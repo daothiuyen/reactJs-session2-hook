@@ -3,6 +3,9 @@ const Todo = (props) => {
     const todos = props.todos;
     return (
         <div className='todo-container'>
+            <div className="title">
+                {props.title}
+            </div>
             {todos.map((item, index) => {
                 //cần thêm key để react thêm hiệu năng
                 return (
@@ -10,6 +13,7 @@ const Todo = (props) => {
                 )
             })
             }
+            <hr />
         </div>
     )
 }

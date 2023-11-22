@@ -10,8 +10,9 @@ const App = () => {
   let [name, setName] = useState('Uyên');
   const [address, setAddress] = useState('');
   const [todos, setTodos] = useState([
-    { id: 1, title: 'Todo 1' },
-    { id: 2, title: 'Todo 2' }
+    { id: 1, title: 'Todo 1', type: 'type 1' },
+    { id: 2, title: 'Todo 2', type: 'type 1' },
+    { id: 3, title: 'Todo 3', type: 'type 3' },
   ]);
   const handleEventClick = () => {
     if (!address) {
@@ -19,7 +20,7 @@ const App = () => {
       return;
     }
     //hook not merge state
-    let todo = { id: 3, title: address }
+    let todo = { id: 3, title: address, type: 'uyên' }
     setTodos([...todos, todo]);
     setAddress('');
   }
@@ -29,11 +30,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <Nav />
       <header className="App-header">
+        <Nav />
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Hello world {name}</h1>
-        <Todo todos={todos} />
+        <Todo
+          todos={todos}
+          title="title"
+        />
+        <Todo
+          todos={todos.filter(item => item.type === 'type 1')}
+          title="title"
+        />
         <input type="text" value={address} onChange={(event) => handleOnChange(event)} />
         <button type="button" onClick={() => handleEventClick()}>Click</button>
       </header>
