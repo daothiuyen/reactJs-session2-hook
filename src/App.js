@@ -20,12 +20,18 @@ const App = () => {
       return;
     }
     //hook not merge state
-    let todo = { id: 3, title: address, type: 'uyên' }
+    let todo = { id: Math.floor(Math.random() * 10000), title: address, type: 'uyên' }
     setTodos([...todos, todo]);
     setAddress('');
   }
   const handleOnChange = (event) => {
-    console.log('fdfdg', event.target.value)
+    setAddress(event.target.value);
+  }
+
+  const deleteDataTodo = (id) => {
+    let currentTodo = todos;
+    currentTodo = todos.filter(item => item.id !== id)
+    setTodos(currentTodo);
   }
 
   return (
@@ -36,7 +42,8 @@ const App = () => {
         <h1>Hello world {name}</h1>
         <Todo
           todos={todos}
-          title="title"
+          title={'title'}
+          deleteDataTodo={deleteDataTodo}
         />
         <Todo
           todos={todos.filter(item => item.type === 'type 1')}
