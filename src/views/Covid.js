@@ -5,9 +5,10 @@ import moment from 'moment';
 
 const Covid = () => {
     const [dataRandom, setDataRandom] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
     useEffect(async () => {
-        setTimeout(async () => {
+        try {
             let res = await axios.get('https://random-data-api.com/api/v2/users?size=2&is_xml=true')
             let data = res && res.data ? res.data : [];
             if (data && data.length > 0) {
@@ -16,10 +17,12 @@ const Covid = () => {
                 })
             }
             setDataRandom(data);
-            setLoading(false);
-        }, 20000)
-
-
+            setIsLoading(false);
+            setIsError(false)
+        } catch (error) {
+            setIsError(true);
+            setIsLoading(false);
+        }
     }, [])
     return (
         <table>
@@ -35,7 +38,7 @@ const Covid = () => {
 
             </thead>
             <tbody>
-                {loading === false && dataRandom && dataRandom.length > 0 &&
+                {isError === false && isLoading === false && dataRandom && dataRandom.length > 0 &&
                     dataRandom.map(item => {
                         return (
                             <tr key={item.id}>
@@ -49,8 +52,11 @@ const Covid = () => {
                     })
                 }
 
-                {loading === true &&
+                {isLoading === true &&
                     <tr colSpan='5' style={{ 'textAlign': 'center' }}>Loading</tr>
+                }
+                {isError === true &&
+                    <tr colSpan='5' style={{ 'textAlign': 'center' }}>Something...</tr>
                 }
 
             </tbody>
