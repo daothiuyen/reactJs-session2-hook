@@ -4,6 +4,8 @@ import Nav from './views/Nav';
 import { useState, useEffect } from 'react';
 import Todo from './views/Todo';
 import Covid from './views/Covid';
+import Blog from './views/Blog';
+import DetailBlog from './views/DetailBlog';
 import {
   BrowserRouter as Router,
   Switch,
@@ -68,6 +70,12 @@ const App = () => {
               />
               <input type="text" value={address} onChange={(event) => handleOnChange(event)} />
               <button type="button" onClick={() => handleEventClick()}>Click</button>
+            </Route>
+            <Route path="/blog" exact>
+              <Blog />
+            </Route>
+            <Route path="/blog/:id">
+              <DetailBlog />
             </Route>
           </Switch>
         </header>

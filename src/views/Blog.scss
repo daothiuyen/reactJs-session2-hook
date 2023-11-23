@@ -1,0 +1,19 @@
+.blogs-container{
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+
+    .item-blog{
+        border: 1px solid grey;
+        border-radius: 3px;
+        padding: 10px;
+        margin: 10px 10px;
+        max-width: 230px;
+        text-align: left;
+        .title{
+            font-weight: 600;
+            color: aqua;
+            margin-bottom: 10px;
+        }
+    }
+}

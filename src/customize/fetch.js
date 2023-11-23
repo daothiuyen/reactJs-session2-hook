@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from 'moment';
 
-const useFetch = (url) => {
+const useFetch = (url, isDataRandom) => {
     const [data, setDataRandom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
@@ -15,7 +15,7 @@ const useFetch = (url) => {
                     cancelToken: ourRequest.token,
                 })
                 let data = res && res.data ? res.data : [];
-                if (data && data.length > 0) {
+                if (data && data.length > 0 && isDataRandom === true) {
                     data.map(item => {
                         item.date_of_birth = moment(item.date_of_birth).format('DD/MM/YYYY');
                     })

@@ -4,7 +4,7 @@ import useFetch from "../customize/fetch";
 
 const Covid = () => {
 
-    const { data: dataRandom, isLoading, isError } = useFetch('https://random-data-api.com/api/v2/users?size=2&is_xml=true')
+    const { data: dataRandom, isLoading, isError } = useFetch(`https://random-data-api.com/api/v2/users?size=2&is_xml=true`, true)
 
     return (
         <table>
