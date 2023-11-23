@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from 'moment';
 
-const useFetch = () => {
+const useFetch = (url) => {
     const [data, setDataRandom] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     useEffect(() => {
+        const ourRequest = axios.CancelToken.source() // <-- 1st step
         try {
             async function fetchData() {
-                let res = await axios.get('https://random-data-api.com/api/v2/users?size=2&is_xml=true')
+                let res = await axios.get(url, {
+                    cancelToken: ourRequest.token,
+                })
                 let data = res && res.data ? res.data : [];
                 if (data && data.length > 0) {
                     data.map(item => {
@@ -21,13 +24,23 @@ const useFetch = () => {
                 setIsLoading(false);
                 setIsError(false);
             }
-            fetchData();
+            setTimeout(() => {
+                fetchData();
+            }, 3000)
+
         } catch (error) {
-            console.log('dsd');
-            setIsError(true);
-            setIsLoading(false);
+            if (axios.isCancel(error)) {
+                console.log('Request canceled', error.message)
+            } else {
+                setIsError(true);
+                setIsLoading(false);
+            }
+
         }
-    }, [])
+        return () => {
+            ourRequest.cancel() // <-- 3rd step
+        }
+    }, [url])
     return {
         data, isError, isLoading
     }
