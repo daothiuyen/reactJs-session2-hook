@@ -13,7 +13,7 @@ const Blog = () => {
 
     return (
         <div className="blogs-container">
-            {newData && newData.length > 0 &&
+            {isLoading === false && newData && newData.length > 0 &&
                 newData.map(item => {
                     return (
                         <div key={item.id} className="item-blog">
@@ -24,7 +24,11 @@ const Blog = () => {
                     )
                 })
             }
+            {isLoading === true &&
+                <div>Loading</div>
+            }
         </div>
+
     )
 }
 
