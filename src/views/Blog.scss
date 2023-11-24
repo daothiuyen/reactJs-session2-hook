@@ -10,10 +10,19 @@
         margin: 10px 10px;
         max-width: 230px;
         text-align: left;
+        min-width: 230px;
         .title{
             font-weight: 600;
             color: aqua;
             margin-bottom: 10px;
         }
+    }
+}
+.add-new-blog {
+    // width: 300px;
+    padding: 10px;
+    border: 1px solid grey;
+    .btn-add{
+        margin-top: 10px;
     }
 }

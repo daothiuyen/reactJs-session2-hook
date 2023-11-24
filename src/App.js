@@ -6,6 +6,7 @@ import Todo from './views/Todo';
 import Covid from './views/Covid';
 import Blog from './views/Blog';
 import DetailBlog from './views/DetailBlog';
+import AddBlog from './views/AddBlog';
 import {
   BrowserRouter as Router,
   Switch,
@@ -76,6 +77,9 @@ const App = () => {
             </Route>
             <Route path="/blog/:id">
               <DetailBlog />
+            </Route>
+            <Route path="/blog-add">
+              <AddBlog />
             </Route>
           </Switch>
         </header>
