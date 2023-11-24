@@ -7,6 +7,7 @@ import Covid from './views/Covid';
 import Blog from './views/Blog';
 import DetailBlog from './views/DetailBlog';
 import AddBlog from './views/AddBlog';
+import NotFound from './views/NotFound';
 import {
   BrowserRouter as Router,
   Switch,
@@ -80,6 +81,9 @@ const App = () => {
             </Route>
             <Route path="/blog-add">
               <AddBlog />
+            </Route>
+            <Route path="*">
+              <NotFound />
             </Route>
           </Switch>
         </header>
